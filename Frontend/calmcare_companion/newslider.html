@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/news-slider.css">
+</head>
+<body>
+    <div class="slider-container">
+
+        <div class="slides fade">
+            <div class="slider-numbers">1/4</div>
+            <div class="slider-image"><img src="https://image.ibb.co/kpmt3k/background_1.jpg" alt="background_1"></div>
+            <div class="slider-caption">Caption 1</div>
+        </div> <!-- slider -->
+    
+        <div class="slides fade">
+            <div class="slider-numbers">2/4</div>
+            <div class="slider-image"><img src="https://image.ibb.co/mGxNw5/background_2.jpg" alt="background_2"></div>
+            <div class="slider-caption">Caption 2</div>
+        </div> <!-- slider -->
+    
+        <div class="slides fade">
+            <div class="slider-numbers">3/4</div>
+            <div class="slider-image"><img src="https://image.ibb.co/gd5gpQ/background_3.jpg" alt="background_3"></div>
+            <div class="slider-caption">Caption 3</div>
+        </div> <!-- slider -->
+    
+        <div class="slides fade">
+            <div class="slider-numbers">4/4</div>
+            <div class="slider-image"><img src="https://image.ibb.co/jOgXw5/background_4.jpg" alt="background_4"></div>
+            <div class="slider-caption">Caption 4</div>
+        </div> <!-- slider -->
+    
+        <!-- Slider Next and Previous buttons -->
+        <a class="prev" onclick="plusIndex(-1)">❮</a>
+        <a class="next" onclick="plusIndex(+1)">❯</a>
+    
+        <!-- Slider Selection Bullets -->
+        <div class="slider-bullets" id="slider-bullets">
+            <span class="dots" onclick="currentSlide(1)"></span>
+            <span class="dots" onclick="currentSlide(2)"></span>
+            <span class="dots" onclick="currentSlide(3)"></span>
+            <span class="dots" onclick="currentSlide(4)"></span>
+        </div> <!-- Slider Bullets -->
+    </div>
+    <script src="js/news-slider.js"></script>
+
+</body>
+</html>

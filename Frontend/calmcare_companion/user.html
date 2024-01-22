@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+</head>
+<body>
+
+        <div class="navimg">
+            <img src="logo/logo_transparent.png" alt="" />
+            <p class="titlelogo">CalmCare Companion</p>
+            <ul>
+              <li><a href="index.html">LOGOUT</a></li>
+            </ul>
+          </div>
+
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Message CalmCare Companion..." />
+
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    
+    <script>
+        // Get references to the chat form, input field, and messages container
+        const chatForm = document.getElementById('chat-form');
+        const userInputField = document.getElementById('user-input');
+        const chatMessagesContainer = document.getElementById('chat-messages');
+    
+
+
+        // Event listener for chat form submission
+        chatForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+    
+            // Get the user input from the input field
+            const userInput = userInputField.value;
+    
+            // Clear the input field
+            // userInputField.value = '';
+    
+            // Send the user input to the Flask code using an AJAX request
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/get_symptoms');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    // Get the response from the Flask code
+                    const response = JSON.parse(xhr.responseText);
+    
+                    // Display the chatbot's response in the chat interface
+                    displayChatbotResponse(response.disease);
+                    displayChatbotResponse(response.precautions);
+    
+                    // Speak the chatbot's response
+                    speak(response.disease);
+                    speak(response.precautions);
+                }
+            };
+            xhr.send(`symptom=${userInput}`);
+        });
+    
+        // Function to display the chatbot's response in the chat interface
+        function displayChatbotResponse(message) {
+            // Create a new chat message element
+            const chatMessage = document.createElement('div');
+            chatMessage.classList.add('chat-message');
+            chatMessage.textContent = message;
+    
+            // Append the chat message to the messages container
+            chatMessagesContainer.appendChild(chatMessage);
+    
+            // Scroll to the bottom of the messages container
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+    
+    </script>
+    
+    <div class="container">
+        <button type="submit" class="btn" onclick="openPopup()">Find on Map</button>
+        <div class="popup" id="popup">
+            <div class="container">
+                <!-- <h1>Embed Location Map</h1> -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.609076472004!2d74.5988825749218!3d16.845738683952067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc1237f52c65db5%3A0xa3535676176ded0a!2sWalchand%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1705312024482!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          <button type="button" onclick="closePopup()">Ok</button>
+        </div>
+      </div>
+
+      <script>
+          let popup = document.getElementById("popup");
+  
+          function openPopup(){
+              popup.classList.add("open-popup");
+          }
+  
+          function closePopup(){
+              popup.classList.remove("open-popup");
+          }
+      </script>
+    <!-- </div> -->
+</body>
+</html>
